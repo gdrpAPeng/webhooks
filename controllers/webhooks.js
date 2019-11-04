@@ -5,6 +5,9 @@ const config = require('../webhook.config.json')
 
 class Webhooks {
     async webhooks(req, res, next) {
+        res.json({
+            message: 'Success'
+        })
         const { name, git_url } = req.body.repository
         const { rootPath } = config
         // repository.name
@@ -32,9 +35,6 @@ class Webhooks {
         try {
             await execSync(commandsStr, {
                 cwd: dirPath
-            })
-            res.json({
-                message: 'Success'
             })
         } catch(e) {
             console.log(e)
