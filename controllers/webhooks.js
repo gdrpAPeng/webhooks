@@ -20,13 +20,13 @@ class Webhooks {
         }
 
         // 获取项目配置命令
-        let commands = JSON.parse(
+        let projectConfig = JSON.parse(
             fs.readFileSync(`${dirPath}/webhook.config.json`).toString('utf-8')
         ) 
 
         let commandsStr = [
             `git pull`,
-            ...commands
+            ...projectConfig.commands
         ].join(' & ')
 
         try {
