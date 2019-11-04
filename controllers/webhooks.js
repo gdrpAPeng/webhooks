@@ -5,9 +5,8 @@ const config = require('../webhook.config.json')
 
 class Webhooks {
     async webhooks(req, res, next) {
-        console.log('start ==== start')
         const { name, git_url } = req.body.repository
-        const { rootPath, commands } = config
+        const { rootPath } = config
         // repository.name
         // repository.git_url
         const dirPath = path.join(rootPath, `/${name}`)
@@ -19,7 +18,12 @@ class Webhooks {
                cwd: rootPath
            })
         }
-        
+
+        // 获取项目配置命令
+        let commands = JSON.parse(
+            fs.readFileSync(`${dirPath}/webhook.config.json`).toString('utf-8')
+        ) 
+
         let commandsStr = [
             `git pull`,
             ...commands
@@ -35,10 +39,6 @@ class Webhooks {
         } catch(e) {
             console.log(e)
         }
-        console.log('应该有了 === 测试 github push == restart?')
-        // res.json({
-        //     end: true
-        // })
     }
 }
 

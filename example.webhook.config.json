@@ -1,5 +1,7 @@
 {
     "projectName": "webhooks",
-    "rootPath": "D:\\APeng\\Code\\test-dir",
-    "commands": []
+    "rootPath": "/home/project",
+    "commands": [
+        "yarn"
+    ]
 }
