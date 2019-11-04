@@ -1,13 +1,35 @@
+var path = require('path')
+const fs = require('fs')
+const { execSync } = require('child_process')
+const config = require('../webhook.config.json')
+
 class Webhooks {
     webhooks(req, res, next) {
-        // 获取到项目名
-        // 存在 - 更新代码
-        // 不存在则克隆
-        // 进入目录
-        // 读取配置文件数据，根据项目执行命令
-        console.log(req.body)
-        console.log('控制器啊啊啊啊啊啊')
-        res.json(req.body)
+        const { name, git_url } = req.body.repository
+        const { rootPath, commands } = config
+        // repository.name
+        // repository.git_url
+        const dirPath = path.join(rootPath, `/${name}`)
+        try {
+            fs.accessSync(dirPath) // 检查是否存在目录
+        } catch(e) {
+            // clone
+            execSync(`cd ${rootPath} & git clone ${git_url}`)
+        }
+        
+        let commandsStr = [
+            `cd ${dirPath}`,
+            ...commands
+        ].join(' & ')
+        try {
+            execSync(commandsStr)
+            res.json({
+                message: 'Success'
+            })
+        } catch(e) {
+            console.log(e)
+        }
+        
     }
 }
 

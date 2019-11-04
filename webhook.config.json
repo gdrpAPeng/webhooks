@@ -1,5 +1,8 @@
 {
-    "name": "webhook",
+    "projectName": "webhooks",
     "rootPath": "/home/project",
-    "base": []
+    "commands": [
+        "yarn",
+        "yarn dev"
+    ]
 }
