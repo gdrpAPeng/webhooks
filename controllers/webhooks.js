@@ -5,7 +5,7 @@ const config = require('../webhook.config.json')
 
 class Webhooks {
     webhooks(req, res, next) {
-        console.log('start')
+        console.log('start ==== start')
         const { name, git_url } = req.body.repository
         const { rootPath, commands } = config
         // repository.name
