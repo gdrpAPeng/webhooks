@@ -40,9 +40,9 @@ class Webhooks {
             console.log(e)
         }
         console.log('应该有了 === 测试 github push == restart?')
-        // res.json({
-        //     end: true
-        // })
+        res.json({
+            end: true
+        })
     }
 }
 
