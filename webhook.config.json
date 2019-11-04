@@ -2,7 +2,6 @@
     "projectName": "webhooks",
     "rootPath": "/home/project",
     "commands": [
-        "yarn",
-        "yarn dev"
+        "yarn"
     ]
 }

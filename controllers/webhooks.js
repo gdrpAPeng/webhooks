@@ -19,6 +19,7 @@ class Webhooks {
         
         let commandsStr = [
             `cd ${dirPath}`,
+            `git pull`,
             ...commands
         ].join(' & ')
         try {
