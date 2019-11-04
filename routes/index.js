@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.post('/webhook', function(req, res, next) {
   console.log('=====================')
-  console.log(req)
+  console.log(req.body)
   console.log('=====================')
   res.json(req.body)
 });
