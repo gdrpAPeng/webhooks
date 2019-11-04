@@ -4,7 +4,7 @@ const { execSync } = require('child_process')
 const config = require('../webhook.config.json')
 
 class Webhooks {
-    webhooks(req, res, next) {
+    async webhooks(req, res, next) {
         console.log('start ==== start')
         const { name, git_url } = req.body.repository
         const { rootPath, commands } = config
@@ -12,10 +12,10 @@ class Webhooks {
         // repository.git_url
         const dirPath = path.join(rootPath, `/${name}`)
         try {
-            fs.accessSync(dirPath) // 检查是否存在目录
+           await fs.accessSync(dirPath) // 检查是否存在目录
         } catch(e) {
             // clone
-            execSync(`cd ${rootPath} & git clone ${git_url}`)
+           await execSync(`cd ${rootPath} & git clone ${git_url}`)
         }
         
         let commandsStr = [
@@ -25,7 +25,7 @@ class Webhooks {
         ].join(' & ')
         console.log(commands)
         try {
-            execSync(commandsStr)
+           await execSync(commandsStr)
             res.json({
                 message: 'Success'
             })
