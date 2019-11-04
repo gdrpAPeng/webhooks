@@ -18,14 +18,21 @@ class Webhooks {
            await execSync(`cd ${rootPath} & git clone ${git_url}`)
         }
         
-        let commandsStr = [
+        let commandsArr = [
             `cd ${dirPath}`,
             `git pull`,
             ...commands
-        ].join(' & ')
-        console.log(commands)
+        ]
+        console.log(commandsArr)
         try {
-           await execSync(commandsStr)
+            for(let i = 0; i < commandsArr.length; i++) {
+                try {
+                    await execSync(commandsArr[i])
+                }catch(e) {
+                    console.log(e)
+                    console.log(commandsArr[i])
+                }  
+            }
             res.json({
                 message: 'Success'
             })
