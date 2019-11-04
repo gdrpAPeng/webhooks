@@ -15,24 +15,19 @@ class Webhooks {
            await fs.accessSync(dirPath) // 检查是否存在目录
         } catch(e) {
             // clone
-           await execSync(`cd ${rootPath} & git clone ${git_url}`)
+           await execSync(`git clone ${git_url}`, {
+               cwd: rootPath
+           })
         }
         
-        let commandsArr = [
-            `cd ${dirPath}`,
+        let commandsStr = [
             `git pull`,
             ...commands
-        ]
-        console.log(commandsArr)
+        ].join(' & ')
         try {
-            for(let i = 0; i < commandsArr.length; i++) {
-                try {
-                    await execSync(commandsArr[i])
-                }catch(e) {
-                    console.log(e)
-                    console.log(commandsArr[i])
-                }  
-            }
+            await execSync(commandsStr, {
+                cwd: dirp
+            })
             res.json({
                 message: 'Success'
             })
