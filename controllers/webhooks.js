@@ -33,6 +33,9 @@ class Webhooks {
             console.log(e)
         }
         console.log('end === hhhhh')
+        res.json({
+            end: true
+        })
     }
 }
 
