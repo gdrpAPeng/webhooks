@@ -32,7 +32,7 @@ class Webhooks {
         } catch(e) {
             console.log(e)
         }
-        console.log('end === test')
+        console.log('end === 测试 github push')
         // res.json({
         //     end: true
         // })
