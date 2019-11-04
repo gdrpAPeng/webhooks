@@ -24,9 +24,10 @@ class Webhooks {
             `git pull`,
             ...commands
         ].join(' & ')
+
         try {
             await execSync(commandsStr, {
-                cwd: dirp
+                cwd: dirPath
             })
             res.json({
                 message: 'Success'
