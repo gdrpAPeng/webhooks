@@ -23,6 +23,7 @@ class Webhooks {
             `git pull`,
             ...commands
         ].join(' & ')
+        console.log(commands)
         try {
             execSync(commandsStr)
             res.json({
