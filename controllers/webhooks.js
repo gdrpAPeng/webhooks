@@ -32,10 +32,10 @@ class Webhooks {
         } catch(e) {
             console.log(e)
         }
-        console.log('end === hhhhh')
-        res.json({
-            end: true
-        })
+        console.log('end === hhhhhyyyy')
+        // res.json({
+        //     end: true
+        // })
     }
 }
 
