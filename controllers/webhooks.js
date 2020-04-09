@@ -5,7 +5,9 @@ const config = require('../webhook.config.json')
 
 class Webhooks {
     async webhooks(req, res, next) {
-        
+        res.json({
+            message: 'Success'
+        })
         const { name, git_url } = req.body.repository
         const { rootPath } = config
         // repository.name
@@ -23,26 +25,15 @@ class Webhooks {
         let projectConfig = JSON.parse(
             fs.readFileSync(`${dirPath}/webhook.config.json`).toString('utf-8')
         ) 
-        res.json({
-            message: 'Success',
-            config: projectConfig,
-            target: path.join(dirPath, projectConfig.rootPath)
-        })
+        
 
         await execSync('git pull', {
             cwd: dirPath
         })
 
-        
-
         let commandsStr = [
             ...projectConfig.commands
         ].join(' & ')
-
-        // let targetDirPath = dirPath
-        // if(projectConfig.rootPath) {
-        //     targetDirPath = path.join(targetDirPath, projectConfig.rootPath)
-        // }
 
         const targetDirPath = path.join(dirPath, projectConfig.rootPath)
         
