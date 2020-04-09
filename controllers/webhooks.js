@@ -12,7 +12,7 @@ class Webhooks {
         const { rootPath } = config
         // repository.name
         // repository.git_url
-        const dirPath = path.join(rootPath, `/${name}`)
+        const dirPath = path.join(rootPath, name)
         try {
            await fs.accessSync(dirPath) // 检查是否存在目录
         } catch(e) {
@@ -34,7 +34,7 @@ class Webhooks {
 
         let targetDirPath = dirPath
         if(projectConfig.rootPath) {
-            targetDirPath = path.join(targetDirPath, `/${projectConfig.rootPath}`)
+            targetDirPath = path.join(targetDirPath, projectConfig.rootPath)
         }
         
         console.log(targetDirPath, '===')
