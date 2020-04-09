@@ -37,11 +37,12 @@ class Webhooks {
 
         const targetDirPath = path.join(dirPath, projectConfig.rootPath)
         
-        console.log(targetDirPath, '===')
         try {
+            console.log('执行指令 ======== start ======')
             await execSync(commandsStr, {
                 cwd: targetDirPath
             })
+            console.log('执行指令 ======== end ======')
         } catch(e) {
             console.log('======')
             console.log(e)
