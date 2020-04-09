@@ -1,7 +1,7 @@
 {
     "projectName": "webhooks",
-    "rootPath": "/home/project",
+    "rootPath": "",
     "commands": [
-        "yarn"
+        "git pull"
     ]
 }
