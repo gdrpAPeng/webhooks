@@ -32,10 +32,12 @@ class Webhooks {
             ...projectConfig.commands
         ].join(' & ')
 
-        let targetDirPath = dirPath
-        if(projectConfig.rootPath) {
-            targetDirPath = path.join(targetDirPath, projectConfig.rootPath)
-        }
+        // let targetDirPath = dirPath
+        // if(projectConfig.rootPath) {
+        //     targetDirPath = path.join(targetDirPath, projectConfig.rootPath)
+        // }
+
+        const targetDirPath = path.join(dirPath, projectConfig.rootPath)
         
         console.log(targetDirPath, '===')
         try {
@@ -43,7 +45,9 @@ class Webhooks {
                 cwd: targetDirPath
             })
         } catch(e) {
+            console.log('======')
             console.log(e)
+            console.log('======')
         }
     }
 }
