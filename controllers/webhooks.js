@@ -32,8 +32,11 @@ class Webhooks {
             ...projectConfig.commands
         ].join(' & ')
 
-
-        const targetDirPath = projectConfig.rootPath? path.join(dirPath, `/${projectConfig.rootPath}`): dirPath
+        let targetDirPath = dirPath
+        if(projectConfig.rootPath) {
+            targetDirPath = path.join(targetDirPath, `/${projectConfig.rootPath}`)
+        }
+        
         console.log(targetDirPath, '===')
         try {
             await execSync(commandsStr, {
