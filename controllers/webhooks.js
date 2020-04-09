@@ -5,9 +5,7 @@ const config = require('../webhook.config.json')
 
 class Webhooks {
     async webhooks(req, res, next) {
-        res.json({
-            message: 'Success'
-        })
+        
         const { name, git_url } = req.body.repository
         const { rootPath } = config
         // repository.name
@@ -21,15 +19,21 @@ class Webhooks {
                cwd: rootPath
            })
         }
+        // 获取项目配置命令
+        let projectConfig = JSON.parse(
+            fs.readFileSync(`${dirPath}/webhook.config.json`).toString('utf-8')
+        ) 
+        res.json({
+            message: 'Success',
+            config: projectConfig,
+            target: path.join(dirPath, projectConfig.rootPath)
+        })
 
         await execSync('git pull', {
             cwd: dirPath
         })
 
-        // 获取项目配置命令
-        let projectConfig = JSON.parse(
-            fs.readFileSync(`${dirPath}/webhook.config.json`).toString('utf-8')
-        ) 
+        
 
         let commandsStr = [
             ...projectConfig.commands
