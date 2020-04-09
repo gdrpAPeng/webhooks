@@ -1,7 +1,0 @@
-{
-    "projectName": "webhooks",
-    "rootPath": "",
-    "commands": [
-        "git pull"
-    ]
-}
